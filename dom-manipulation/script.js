@@ -138,31 +138,17 @@ async function postQuoteToServer(quote) {
 }
 
 // Sync quotes periodically
-async function syncQuotes() {
-  const serverQuotes = await fetchQuotesFromServer();
-
-  let conflictsResolved = 0;
-  serverQuotes.forEach(serverQuote => {
-    const existing = quotes.find(q => q.text === serverQuote.text);
-    if (existing) {
-      // Conflict resolution: server wins
-      existing.category = serverQuote.category;
-      conflictsResolved++;
-    } else {
-      quotes.push(serverQuote);
-    }
-  });
-
-  if (serverQuotes.length > 0) {
+function syncQuotes() {
+  fetchQuotesFromServer().then(serverQuotes => {
+    // Conflict resolution: server data takes precedence
+    quotes = serverQuotes;
     saveQuotes();
-    populateCategories();
-    if (conflictsResolved > 0) {
-      showNotification(`✅ Synced with server. ${conflictsResolved} conflicts resolved.`);
-    } else {
-      showNotification("✅ Synced with server. No conflicts found.");
-    }
-  }
+
+    // Show notification
+    showNotification("Quotes synced with server!");
+  });
 }
+
 
 function showNotification(message) {
   notificationArea.textContent = message;
