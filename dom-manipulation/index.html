@@ -8,41 +8,16 @@
 <body>
   <h1>Dynamic Quote Generator</h1>
 
-  <!-- Category Filter -->
-  <label for="categoryFilter">Filter by Category:</label>
-  <select id="categoryFilter" onchange="filterQuotes()">
-    <option value="all">All Categories</option>
-  </select>
+  <div id="quoteDisplay"></div>
 
-  <!-- Quote Display -->
-  <div id="quoteDisplay">Your quote will appear here...</div>
+  <button id="newQuoteBtn">Show New Quote</button>
 
-  <!-- Action Buttons -->
-  <button id="newQuote">Show New Quote</button>
-  <button id="exportBtn">Export Quotes (JSON)</button>
-  <input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
+  <h3>Add a New Quote</h3>
+  <input type="text" id="quoteText" placeholder="Enter quote" />
+  <input type="text" id="quoteCategory" placeholder="Enter category" />
+  <button id="addQuoteBtn">Add Quote</button>
 
-  <!-- Add Quote Form -->
-  <div>
-    <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
-    <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
-    <button id="addQuoteBtn">Add Quote</button>
-  </div>
-  <!-- Sync controls / notifications -->
-  <div id="syncControls" style="margin-top:12px;">
-    <button id="syncNowBtn">Sync Now</button>
-    <span id="syncStatus" style="margin-left:10px;">Not synced yet.</span>
-  </div>
-
-  <!-- Conflict resolution panel (hidden until conflicts exist) -->
-  <div id="conflictPanel" style="display:none; border:1px solid #ccc; padding:10px; margin-top:12px;">
-    <h3>Conflicts detected</h3>
-    <div id="conflictList"></div>
-    <button id="applyResolutionsBtn">Apply Resolutions</button>
-    <button id="dismissConflictsBtn">Dismiss</button>
-  </div>
-
-  <!-- Link JS -->
+  <!-- Link script.js -->
   <script src="script.js"></script>
 </body>
 </html>
