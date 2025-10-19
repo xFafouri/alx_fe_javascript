@@ -5,7 +5,7 @@ let quotes = [
   { text: "In the middle of difficulty lies opportunity.", category: "Inspiration" }
 ];
 
-// Function to display a random quote (required name: showRandomQuote)
+// Function to show a random quote
 function showRandomQuote() {
   const randomIndex = Math.floor(Math.random() * quotes.length);
   const randomQuote = quotes[randomIndex];
@@ -27,7 +27,7 @@ function addQuote() {
 
   if (text && category) {
     quotes.push({ text, category });
-    showRandomQuote(); // Update the display
+    showRandomQuote(); // Update display
     textInput.value = "";
     categoryInput.value = "";
   } else {
@@ -35,9 +35,33 @@ function addQuote() {
   }
 }
 
-// Event listeners
-document.getElementById("newQuoteBtn").addEventListener("click", showRandomQuote);
-document.getElementById("addQuoteBtn").addEventListener("click", addQuote);
+// Function to create the add quote form dynamically
+function createAddQuoteForm() {
+  const container = document.getElementById("addQuoteContainer");
 
-// Display one quote when the page loads
-window.onload = showRandomQuote;
+  const textInput = document.createElement("input");
+  textInput.id = "quoteText";
+  textInput.placeholder = "Enter quote";
+
+  const categoryInput = document.createElement("input");
+  categoryInput.id = "quoteCategory";
+  categoryInput.placeholder = "Enter category";
+
+  const addButton = document.createElement("button");
+  addButton.id = "addQuoteBtn";
+  addButton.textContent = "Add Quote";
+  addButton.addEventListener("click", addQuote);
+
+  container.appendChild(textInput);
+  container.appendChild(categoryInput);
+  container.appendChild(addButton);
+}
+
+// Event listener for “Show New Quote”
+document.getElementById("newQuoteBtn").addEventListener("click", showRandomQuote);
+
+// Initialize
+window.onload = () => {
+  showRandomQuote();
+  createAddQuoteForm(); // dynamically create the form
+};
