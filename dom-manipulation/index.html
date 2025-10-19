@@ -28,6 +28,19 @@
     <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
     <button id="addQuoteBtn">Add Quote</button>
   </div>
+  <!-- Sync controls / notifications -->
+  <div id="syncControls" style="margin-top:12px;">
+    <button id="syncNowBtn">Sync Now</button>
+    <span id="syncStatus" style="margin-left:10px;">Not synced yet.</span>
+  </div>
+
+  <!-- Conflict resolution panel (hidden until conflicts exist) -->
+  <div id="conflictPanel" style="display:none; border:1px solid #ccc; padding:10px; margin-top:12px;">
+    <h3>Conflicts detected</h3>
+    <div id="conflictList"></div>
+    <button id="applyResolutionsBtn">Apply Resolutions</button>
+    <button id="dismissConflictsBtn">Dismiss</button>
+  </div>
 
   <!-- Link JS -->
   <script src="script.js"></script>
