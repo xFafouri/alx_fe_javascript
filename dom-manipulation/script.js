@@ -5,8 +5,8 @@ let quotes = [
   { text: "In the middle of difficulty lies opportunity.", category: "Inspiration" }
 ];
 
-// Function to display a random quote
-function displayRandomQuote() {
+// Function to display a random quote (required name: showRandomQuote)
+function showRandomQuote() {
   const randomIndex = Math.floor(Math.random() * quotes.length);
   const randomQuote = quotes[randomIndex];
 
@@ -27,7 +27,7 @@ function addQuote() {
 
   if (text && category) {
     quotes.push({ text, category });
-    displayRandomQuote(); // Update the display
+    showRandomQuote(); // Update the display
     textInput.value = "";
     categoryInput.value = "";
   } else {
@@ -36,8 +36,8 @@ function addQuote() {
 }
 
 // Event listeners
-document.getElementById("newQuoteBtn").addEventListener("click", displayRandomQuote);
+document.getElementById("newQuoteBtn").addEventListener("click", showRandomQuote);
 document.getElementById("addQuoteBtn").addEventListener("click", addQuote);
 
 // Display one quote when the page loads
-window.onload = displayRandomQuote;
+window.onload = showRandomQuote;
