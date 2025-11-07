@@ -42,15 +42,11 @@ function displayQuotes(filteredQuotes = quotes) {
 }
 
 // 🧩 Filter quotes by selected category
-function filterQuotes() {
-  const selectedCategory = categoryFilter.value;
-  localStorage.setItem("selectedCategory", selectedCategory);
-  if (selectedCategory === "all") {
-    displayQuotes(quotes);
-  } else {
-    const filtered = quotes.filter(q => q.category === selectedCategory);
-    displayQuotes(filtered);
-  }
+function filterQuote(category) {
+  const filtered = quotes.filter(q => q.category === category);
+  const randomIndex = Math.floor(Math.random() * filtered.length);
+  const quoteDisplay = document.getElementById('quoteDisplay');
+  quoteDisplay.textContent = filtered[randomIndex].text;
 }
 
 // 🧩 Add new quote and update categories
@@ -80,3 +76,11 @@ window.onload = () => {
   populateCategories();
   filterQuotes();
 };
+
+window.addEventListener('DOMContentLoaded', () => {
+  const savedCategory = localStorage.getItem('selectedCategory');
+  if (savedCategory) {
+    categorySelect.value = savedCategory;
+    filterQuote(savedCategory);
+  }
+});
